@@ -39,6 +39,13 @@ const ViveTalaraPage: React.FC = () => {
     const businessesByCategory = (category: ViveTalaraCategory) => {
         return VIVE_TALARA_BUSINESSES.filter(b => b.category === category);
     };
+    
+    const handleCategoryScroll = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
   return (
     <motion.div
@@ -74,14 +81,15 @@ const ViveTalaraPage: React.FC = () => {
                 <div className="max-w-5xl mx-auto mb-16">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {categoryLinks.map(link => (
-                            <a 
+                            <button 
                                 key={link.id} 
-                                href={`#${link.id}`}
-                                className="group flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-sm text-brand-primary hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                                type="button"
+                                onClick={() => handleCategoryScroll(link.id)}
+                                className="group flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-sm text-brand-primary hover:shadow-xl hover:-translate-y-1 transition-all duration-300 w-full"
                             >
                                 <i className={`${link.icon} text-2xl mb-2 text-brand-accent`}></i>
                                 <span className="font-bold text-center text-sm">{link.name}</span>
-                            </a>
+                            </button>
                         ))}
                     </div>
                 </div>
