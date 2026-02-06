@@ -87,27 +87,38 @@ const ViveTalaraPage: React.FC = () => {
                 </div>
 
                 {/* Business Sections */}
-                {categoryLinks.map(category => (
-                    <motion.section 
-                        key={category.id} 
-                        id={category.id} 
-                        className="mb-16"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.2 }}
-                        variants={sectionVariants}
-                    >
-                        <h2 className="text-3xl font-bold text-brand-primary mb-8 font-serif flex items-center">
-                            <i className={`${category.icon} text-brand-accent mr-4`}></i>
-                            {category.name}
-                        </h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                           {businessesByCategory(category.name).map(business => (
-                               <ViveTalaraCard key={business.id} business={business} />
-                           ))}
-                        </div>
-                    </motion.section>
-                ))}
+                {categoryLinks.map(category => {
+                    const businesses = businessesByCategory(category.name);
+                    return (
+                        <motion.section 
+                            key={category.id} 
+                            id={category.id} 
+                            className="mb-16"
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.2 }}
+                            variants={sectionVariants}
+                        >
+                            <h2 className="text-3xl font-bold text-brand-primary mb-8 font-serif flex items-center">
+                                <i className={`${category.icon} text-brand-accent mr-4`}></i>
+                                {category.name}
+                            </h2>
+                            {businesses.length > 0 ? (
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                                {businesses.map(business => (
+                                    <ViveTalaraCard key={business.id} business={business} />
+                                ))}
+                                </div>
+                            ) : (
+                                <div className="text-center py-10 px-6 bg-white rounded-lg shadow-sm border border-gray-200">
+                                    <i className="fas fa-hourglass-start text-4xl text-gray-400 mb-4"></i>
+                                    <h3 className="text-lg font-semibold text-brand-dark">Próximamente en esta sección</h3>
+                                    <p className="text-gray-500 mt-1 max-w-md mx-auto">Estamos validando y preparando a las mejores emprendedoras de este rubro. ¡Vuelve pronto para descubrir sus propuestas!</p>
+                                </div>
+                            )}
+                        </motion.section>
+                    );
+                })}
             </div>
         </div>
 
