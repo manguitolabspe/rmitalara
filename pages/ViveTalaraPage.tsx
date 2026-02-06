@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 // FIX: The `ViveTalaraCategory` enum is a type and should be imported from `../types` to maintain consistency with other components.
@@ -67,26 +68,25 @@ const ViveTalaraPage: React.FC = () => {
             </div>
         </section>
         
-        {/* Category Navigation */}
-        <section className="bg-white py-12 sticky top-24 z-30 shadow-md">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {categoryLinks.map(link => (
-                        <a 
-                            key={link.id} 
-                            href={`#${link.id}`}
-                            className="group flex flex-col items-center justify-center p-4 bg-brand-light rounded-lg text-brand-primary hover:bg-brand-accent hover:text-white transition-all duration-300"
-                        >
-                            <i className={`${link.icon} text-3xl mb-2`}></i>
-                            <span className="font-bold text-center text-sm">{link.name}</span>
-                        </a>
-                    ))}
-                </div>
-            </div>
-        </section>
-
         <div className="bg-brand-light">
             <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+                {/* Category Navigation */}
+                <div className="max-w-5xl mx-auto mb-16">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {categoryLinks.map(link => (
+                            <a 
+                                key={link.id} 
+                                href={`#${link.id}`}
+                                className="group flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-sm text-brand-primary hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                            >
+                                <i className={`${link.icon} text-2xl mb-2 text-brand-accent`}></i>
+                                <span className="font-bold text-center text-sm">{link.name}</span>
+                            </a>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Business Sections */}
                 {categoryLinks.map(category => (
                     <motion.section 
                         key={category.id} 
